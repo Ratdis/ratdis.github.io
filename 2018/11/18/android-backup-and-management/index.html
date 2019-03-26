@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="ratdis,ratdis1@gmail.com"><title>Android软件数据备份以及管理优化 · 墨染的樱花🌸</title><meta name="description" content="写在前面最近有些力不从心，重装macOS后又得重装Android(最近Sony终于咕咕咕的更新了安卓P)，服务器也都重装，为啥重装呢…因为有点系统洁癖，这篇文章下我总结下安卓重装后的一些操作，会涉及到刷机前的备份准备以及刷机后系统的管理优化，希望对你有所帮助。
+
+下面的大部分操作需要root
+
+备份"><meta name="keywords" content="Hexo,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title><a href="/">墨染的樱花🌸</a></h3><div class="description"><p>成就今日 启迪未来</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Android软件数据备份以及管理优化</a></h3></div><div class="post-content"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近有些力不从心，重装macOS后又得重装Android(最近Sony终于咕咕咕的更新了安卓P)，服务器也都重装，为啥重装呢…因为有点系统洁癖，这篇文章下我总结下安卓重装后的一些操作，会涉及到刷机前的备份准备以及刷机后系统的管理优化，希望对你有所帮助。</p>
+<blockquote>
+<p>下面的大部分操作需要root</p>
+</blockquote>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><p>备份是个好习惯，即使不刷机定时备份也是很重要的，备份一般包括App和App的数据，短信联系人，各种系统设置之类的，在这里我们只考虑备份App和App的数据的情况</p>
+<p>在备份之前我们先对安卓下软件数据进行了解</p>
+<h3 id="备份原理"><a href="#备份原理" class="headerlink" title="备份原理"></a>备份原理</h3><p>在Android中的APK是<code>Android Package</code>的缩写，即Android安装包，其实就是一种压缩文件，安装软件时会自动把APK移动到<code>/data/app/</code>下，解压并把dex文件保存到<code>/data/dalvik-cache/</code>目录，接着在<code>/data/data/</code>目录下创建对应的应用数据目录</p>
+<p><code>/data/app/</code>这个目录下都是第三方软件，而系统软件的APK存储在了<code>/system/app/</code>下</p>
+<p>提下<code>/system/app/</code> 和<code>/data/app/</code>的区别</p>
+<ul>
+<li><code>/data/app/</code>下的 普通用户可以卸载，<code>/system/app/</code>下的 只能 root 后删除</li>
+<li><code>/data/app/</code>下的软件即使静默也可以收到各种广播信息，<code>/system/app/</code>下的就不能</li>
+</ul>
+<p>软件的私有数据大部分都存放在<code>/data/data/</code>和<code>/storage/emulated/0/Android/data/</code>下，除了这两个有些大型游戏往往还会有个<code>/storage/emulated/0/Android/obb/</code>，OBB文件(Opaque Binary Blob)是安卓游戏通用数据包，存的都是游戏中所用到的资源，对于有些游戏会将OBB解包<code>/storage/emulated/0/Android/data/</code>目录下，但是也有直接读取不解包的</p>
+<h3 id="开始备份"><a href="#开始备份" class="headerlink" title="开始备份"></a>开始备份</h3><p>有了以上的知识背景后我们就可以手动对应用进行备份了，不过这样不够优雅，手动复制打包移动这些操作早就有了很多自动化的软件了</p>
+<p><del>在这里我们使用钛备份进行各种备份和还原操作</del></p>
+<p><del>具体的软件操作就不多说了，虽然界面万年不变但是还是比较容易上手的</del></p>
+<p><del>接着分析钛备份生成的备份文件，我们会发现当备份一个App以及数据后会生成三个文件，一个文件以<code>.properties</code>结尾，里面记录了一些备份的系统环境和备份软件的版本号之类的信息，给以后还原加载验证用的，另外两个都是<code>gz</code>格式的压缩包，其中一个中含有APK，另一个里面还是个压缩包，压缩着该软件的各种数据，就是上文所提及到的<code>/data/各种文件</code>，钛备份默认不备份软件的缓存文件，通过测试发现钛备份还不会备份obb文件，还得需要手动备份一下，不过问题不大，毕竟用得到obb的还是少数软件，在专业版中可以很方便的使用一键备份和还原所有，计划备份，支持各种国外云备份以及加密也是不错的，可以说是瑕不掩瑜了</del></p>
+<p><del>至于备份联系人短信之类的…</del></p>
+<p>在我使用过<code>Swift Backup</code>后，我只能说句“真香”</p>
+<p>同样支持Pro版计划备份，一键备份和还原，最重要的是支持obb·短信·通话·联系人备份！！，虽然仅支持Google Drive云备份，但是光是界面就不知道比钛备份高到哪里去了，一年订阅Pro1.99刀，5.99刀买断，还是很划算的</p>
+<p>备份文件分析的话，软件数据备份后，会有一个<code>.app</code>结尾的文件，后缀改成apk就是安装包，以<code>.dat</code>结尾的改成zip，里面压缩的就是上文提及到的各种软件数据文件夹(/data/下的)，以<code>.extdat</code>结尾的压缩的是<code>/storage/emulated/0/Android/data/</code>下的，以<code>.exp</code>结尾的是obb文件，只是改了个名字，大小没变，另外还会生成一个<code>.xml</code>的文件，内容经过一些处理，不出意料和钛备份中的.<code>properties</code>文件作用差不多，如果我们在设置中设置了备份加密的话，密匙可能就是存在这个文件中</p>
+<p>至于备份通讯录和短信之类的文件涉及到数据库之类的，技术受限这里就不做分析了，感兴趣的可以尝试下</p>
+<p>备份工作做好就可以强刷固件了(Sony)，一般手机都是Recovery下卡刷ROM包的，具体流程Google一下各自手机型号刷机教程即可</p>
+<h2 id="管理优化"><a href="#管理优化" class="headerlink" title="管理优化"></a>管理优化</h2><p>由于Android的开放，给了一些软件滥用权限可乘之机，为了保护个人隐私和手机的流畅，必须采取一些措施对付了</p>
+<h3 id="管理工具软件"><a href="#管理工具软件" class="headerlink" title="管理工具软件"></a>管理工具软件</h3><p>建议先下一个类似于<code>Appops</code>的权限管理软件以及<code>黑阀</code>管理后台再安装各类软件，安装一个管理一个</p>
+<p>如果你的手机能刷Xposed框架的话(推荐刷Magisk中的Systemless的Xposed)，有很多模块都很好用，由于我手机用的官方固件没法刷进Xposed…所以你懂我意思8</p>
+<p>那就写点各类软件推荐</p>
+<ul>
+<li><p>Appops    管理软件的各种权限，可对付那种不给权限就不让用的流氓，但支付宝的SD卡读取权限压不住，仍可以读取，目前无解，大部分软件还是很管用的</p>
+</li>
+<li><p>Brevent(黑阀)    管理软件后台的软件，很管用就是了</p>
+</li>
+<li><p>SD Maid &amp; Dir   都是清理软件的，前者的话个人还用它来卸载和管理自启权限，后者的对国内流氓文件很棒</p>
+</li>
+<li><p>Airfrozen(空调狗)   冻结流氓和不常用软件的，这类软件很多，只是我一直都是用的这个就是了</p>
+<p>Play上都可以下到，管理软件就差不多这些了</p>
+</li>
+</ul>
+<h3 id="使用IFW管理缓存活动唤醒"><a href="#使用IFW管理缓存活动唤醒" class="headerlink" title="使用IFW管理缓存活动唤醒"></a>使用IFW管理缓存活动唤醒</h3><p>除开以上提到的工具，还值得一提的是是IFW(<code>Intent Firewall</code>)这个玩意</p>
+<p>这是一个起到过滤到Intent的东西，在Android中软件都是使用Intent这个玩意启动新活动、新服务等，我们可以使用这个来阻止一些并不需要的东西开启</p>
+<p>系统是读取<code>/data/system/ifw/</code>下的xml来过滤掉Intent(允许多个文件，可叠加)，我们可以自己编写xml进行过滤，具体怎么写，可以参考<a href="https://selinuxproject.org/page/NB_SEforAndroid_2#ifw.xml" target="_blank" rel="noopener">这里</a>，<del>自己写是不可能的，这辈子都不可能的（逃</del>    可以直接使用已经写好的xml文件<a href="https://github.com/apkjam/IFW" target="_blank" rel="noopener">Github</a> ，复制到<code>/data/system/ifw/</code>下，xml改成644权限，无需重启即刻生效</p>
+<p>但是有些流氓会检查自己申请的服务有没有正常开启，如果没有就会一直发送请求，反而会导致系统资源的消耗和设备耗电量的增加…就很尴尬</p>
+<p>就我日常使用带来的效果还是很明显的，诸如微信这种不得不的后台缓存低了不少</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结?!"></a>总结?!</h2><p>现在手机性能普遍过剩，在我看来运用以上的方法管理好已经够用，最重要的还是保持良好的使用习惯，定时清理下垃圾，远离国内几大流氓厂，能用浏览器快捷解决的绝不下个软件，即使要下也去Play上下</p>
+<p>愿国内安卓生态环境早日转好，虽然不抱什么希望就是了</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-11-18</span><i class="fa fa-comment-o"></i><a href="/2018/11/18/android-backup-and-management/#comments">Comments</a><i class="fa fa-tag"></i><a class="tag" href="/categories/system/" title="system">system </a><a class="tag" href="/tags/backup/" title="backup">backup </a><a class="tag" href="/tags/android/" title="android">android </a><a class="tag" href="/tags/management/" title="management">management </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,https://ratdis.github.io/2018/11/18/android-backup-and-management/,墨染的樱花🌸,Android软件数据备份以及管理优化,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2018/12/18/algorithm-note-1/" title="算法笔记 壹">prev_post</a></li></ul></div><a id="comments"></a><div id="disqus_thread"></div><script>var disqus_shortname = 'ratdis';
+var disqus_identifier = '2018/11/18/android-backup-and-management/';
+var disqus_title = 'Android软件数据备份以及管理优化';
+var disqus_url = 'https://ratdis.github.io/2018/11/18/android-backup-and-management/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//#{theme.disqus}.disqus.com/count.js" async></script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
