@@ -49,36 +49,6 @@
   </entry>
   
   <entry>
-    <title>发生了啥</title>
-    <link href="https://ratdis.github.io/2019/03/27/wtf/"/>
-    <id>https://ratdis.github.io/2019/03/27/wtf/</id>
-    <published>2019-03-27T12:58:40.000Z</published>
-    <updated>2019-04-13T05:33:22.610Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>2019-4-10更新</p><p>hk的VPS已经退款…一定不要年付新商家 <del>各种不靠谱，迟早💊</del></p><p>几星期后删除本文，仅通知</p></blockquote><p>现在是放在了<code>Github</code>上了…其实仔细想想买来的VPS也没有做啥，那就干脆就这样吧，毕竟测速也还行嘛 <del>懒shi你惹</del></p><p><img src="https://i.loli.net/2019/04/10/5cae029cae202.png" alt="Screen Shot 2019-04-10 at 10.34.13 PM-min.png"></p><blockquote><p>2019-03-27</p></blockquote><p>达成”欢迎回家”的成就~，几近折腾又肥到<code>hexo</code>啦</p><p>随手上了个备用站 <a href="https://ratdis.github.io/">https://ratdis.github.io/</a></p><p>之所以换只是为了提升访问速度<del>才不是因为主题</del></p><p><img src="https://i.loli.net/2019/03/27/5c9b4b563d50b.png" alt="测的最好的一次速诶"></p><p>因为是静态博客，所以偷懒直接使用了<code>Disqus</code>，<code>Typecho</code>评论导出插件不起作用暂时也没啥法子，抱歉QAQ</p><p>最近很累很累..就这样吧</p><p>另外樱花开了~</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;2019-4-10更新&lt;/p&gt;
-&lt;p&gt;hk的VPS已经退款…一定不要年付新商家 &lt;del&gt;各种不靠谱，迟早💊&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;几星期后删除本文，仅通知&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;现在是放在了&lt;code&gt;Github&lt;/c
-      
-    
-    </summary>
-    
-      <category term="web" scheme="https://ratdis.github.io/categories/web/"/>
-    
-    
-      <category term="notice" scheme="https://ratdis.github.io/tags/notice/"/>
-    
-  </entry>
-  
-  <entry>
     <title>使用Caddy搭建Typecho</title>
     <link href="https://ratdis.github.io/2019/03/22/use-caddy-build-typecho/"/>
     <id>https://ratdis.github.io/2019/03/22/use-caddy-build-typecho/</id>
