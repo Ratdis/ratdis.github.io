@@ -247,9 +247,9 @@
       <category term="system" scheme="https://ratdis.github.io/categories/system/"/>
     
     
-      <category term="android" scheme="https://ratdis.github.io/tags/android/"/>
-    
       <category term="backup" scheme="https://ratdis.github.io/tags/backup/"/>
+    
+      <category term="android" scheme="https://ratdis.github.io/tags/android/"/>
     
       <category term="management" scheme="https://ratdis.github.io/tags/management/"/>
     
